@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<style>
+    button
+    {
+        width: 200px;
+        margin: 1px;
+    }
+    h2,p
+    {
+        text-align: center;
+        font-family: Arial;
+        margin: 5px;
+    }
+    table
+    {
+        width: 700px;
+        margin: auto;
+    }
+    td
+    {
+        background-color: white;
+        border: 1px solid lightgrey;
+        text-align: center;
+        font-family: Calibri;
+    }
+    th
+    {
+        font-family: Calibri;
+    }
+    form
+    {
+        margin: 20px;
+        text-align: center;
+    }
+
+</style>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body bgcolor=#f5f5f5>
+<div class="header">
+    <h2>DATABASE</h2>
+    <p>поиск по базе</p>
+</div>
+
+<form th:action="@{/bd}">
+    <input class="search" type="text" name="keyword"/>
+    <input type="submit" value="search"/>
+</form>
+
+<table class="bd_tab" cellpadding="2px">
+    <tr>
+        <th>Время</th>
+        <th>Номер рейса</th>
+        <th>Компания</th>
+        <th>Маршрут</th>
+        <th>Терминал</th>
+        <th>Статус</th>
+    </tr>
+    <div th:each="el : ${flying}">
+        <tr>
+            <td th:text="${el.way_time}"/>
+            <td th:text="${el.way_number}"/>
+            <td th:text="${el.way_company}"/>
+            <td th:text="${el.way_end}"/>
+            <td th:text="${el.way_terminal}"/>
+            <td th:text="${el.way_status}"/>
+        </tr>
+    </div>
+</table>
+</body>
+</html>
