@@ -30,7 +30,7 @@ public class MainController
     }
 
     @RequestMapping("/bd")
-    @Cacheable(value="cache")
+    @Cacheable(value="cache",key="#keyword")
     public String bd(Model model, @Param("keyword") String keyword)/*по request включаем param keyword*/
     {
         long starttime=System.currentTimeMillis();
