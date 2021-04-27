@@ -6,7 +6,6 @@ import java.util.List;
 
 @Service
 public interface flying_service
-
 {
     public void save(flying pars);
     public boolean isExist(String fly_t);

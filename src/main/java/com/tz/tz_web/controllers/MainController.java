@@ -12,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.concurrent.TimeUnit;
+
 @Controller
 public class MainController
 {
@@ -28,16 +30,14 @@ public class MainController
         model.addAttribute("flying",flying);
         return "main";
     }
-
     @RequestMapping("/bd")
-    @Cacheable(value="cache",key="#keyword")
-    public String bd(Model model, @Param("keyword") String keyword)/*по request включаем param keyword*/
+    public String bd(Model model, @Param("keyword") String keyword) throws InterruptedException/*по request включаем param keyword*/
     {
         long starttime=System.currentTimeMillis();
-        Iterable<flying> flying= flying_repository.search(keyword);/*search создан в репозитории*/
         logger.info(keyword);
+        Iterable<flying> flying= flying_repository.search(keyword);/*search создан в репозитории*/
+       // System.out.println("time:".concat(Long.toString(System.currentTimeMillis()-starttime)).concat("ms"));
         model.addAttribute("flying",flying);
-        System.out.println("time:".concat(Long.toString(System.currentTimeMillis()-starttime)).concat("ms"));
         return "main";
     }
 
