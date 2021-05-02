@@ -10,7 +10,11 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.net.URL;
+
+import static org.thymeleaf.util.StringUtils.concat;
+
 @Component
+
 public class Parser
 {
     @Autowired
@@ -19,11 +23,18 @@ public class Parser
     public static int ind=-1;
     private static String img_name;
 //    public static String[][]way_mas1;
-    private static Document get_page() throws IOException //Document-для возвращения html-кода
+    private static Document get_page() //Document-для возвращения html-кода
     {
         String url="http://www.vnukovo.ru/flights/online-timetable/#tab-sortie";//Внуково
-        Document page=Jsoup.parse(new URL(url),3000);//Сам документ
-        return page;
+        Document page= null;//Сам документ
+        try {
+            page = Jsoup.parse(new URL(url),3000);
+            return page;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
     @Scheduled(fixedDelay =30000)/*Тайминг обновления БД*/
     public void flight_table() throws Exception
@@ -51,7 +62,6 @@ public class Parser
                 flying.setWay_end(data_way.get(3).text());
                 flying.setWay_terminal(data_way.get(4).text());
                 flying.setWay_status(data_way.get(5).text());
-                if(img_name==""){img_name="not_found_img.jpg";}
                 flying.setWay_image(img_name);
                 ind++;
                 flying_repository.save(flying);
