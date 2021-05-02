@@ -13,6 +13,17 @@ public class flying
         private String way_end;//Место
         private String way_terminal;//Номер терминала
         private String way_status;//Статус рейса
+        private String way_image;
+
+    public String getWay_image()
+    {
+        return way_image;
+    }
+
+    public void setWay_image(String way_image)
+    {
+        this.way_image = way_image;
+    }
 
     public Long getId() {
         return id;

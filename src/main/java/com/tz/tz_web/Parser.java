@@ -17,6 +17,7 @@ public class Parser
     private flying_repository flying_repository;
     private static Document page;
     public static int ind=-1;
+    private static String img_name;
 //    public static String[][]way_mas1;
     private static Document get_page() throws IOException //Document-для возвращения html-кода
     {
@@ -39,6 +40,7 @@ public class Parser
         for(a=0;a<table.select("tr").size()-2;a++)
         {
             way=table.select("tr").get(a);//Рейс
+            img_name=way.select("img[class=company-logo]").attr("src");
             data_way=way.select("td");//Данные рейса
             if(data_way.size()==6)
             {
@@ -49,6 +51,8 @@ public class Parser
                 flying.setWay_end(data_way.get(3).text());
                 flying.setWay_terminal(data_way.get(4).text());
                 flying.setWay_status(data_way.get(5).text());
+                if(img_name==""){img_name="not_found_img.jpg";}
+                flying.setWay_image(img_name);
                 ind++;
                 flying_repository.save(flying);
             }

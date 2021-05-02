@@ -33,7 +33,6 @@
         margin: 20px;
         text-align: center;
     }
-
 </style>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -54,6 +53,7 @@
         <th>Время</th>
         <th>Номер рейса</th>
         <th>Компания</th>
+        <th></th>
         <th>Маршрут</th>
         <th>Терминал</th>
         <th>Статус</th>
@@ -63,6 +63,9 @@
             <td th:text="${el.way_time}"/>
             <td th:text="${el.way_number}"/>
             <td th:text="${el.way_company}"/>
+            <td>
+                <img th:src="'http://www.vnukovo.ru'+${el.way_image}"/>
+            </td>
             <td th:text="${el.way_end}"/>
             <td th:text="${el.way_terminal}"/>
             <td th:text="${el.way_status}"/>
