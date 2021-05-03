@@ -10,11 +10,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.net.URL;
-
-import static org.thymeleaf.util.StringUtils.concat;
-
 @Component
-
 public class Parser
 {
     @Autowired
@@ -22,7 +18,6 @@ public class Parser
     private static Document page;
     public static int ind=-1;
     private static String img_name;
-//    public static String[][]way_mas1;
     private static Document get_page() //Document-для возвращения html-кода
     {
         String url="http://www.vnukovo.ru/flights/online-timetable/#tab-sortie";//Внуково
@@ -34,7 +29,6 @@ public class Parser
             e.printStackTrace();
             return null;
         }
-
     }
     @Scheduled(fixedDelay =30000)/*Тайминг обновления БД*/
     public void flight_table() throws Exception
@@ -44,7 +38,6 @@ public class Parser
         Elements table=main_table.select("tbody");
         Element way=table.select("tr").get(0);//Рейс
         Elements data_way=way.select("td");//Данные рейса
-//        way_mas1=new String[table.select("tr").size()-2][6];
         int a;
          System.out.println("[db update]");
          flying_repository.deleteAll();

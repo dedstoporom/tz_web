@@ -36,7 +36,6 @@ public class MainController
         long starttime=System.currentTimeMillis();
         logger.info(keyword);
         Iterable<flying> flying= flying_repository.search(keyword);/*search создан в репозитории*/
-       // System.out.println("time:".concat(Long.toString(System.currentTimeMillis()-starttime)).concat("ms"));
         model.addAttribute("flying",flying);
         return "main";
     }
