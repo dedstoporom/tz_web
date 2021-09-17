@@ -16,6 +16,6 @@ public interface flying_repository extends CrudRepository<flying,Long>
                                 "or p.way_time LIKE %?1%" +
                                 "or p.way_terminal LIKE %?1%" +
                                 "or p.way_status LIKE %?1%")
-public List<flying> search(String keyword);
+List<flying> search(String keyword);
 }
 

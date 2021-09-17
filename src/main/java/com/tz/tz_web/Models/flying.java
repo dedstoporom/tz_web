@@ -7,12 +7,12 @@ public class flying
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
-        private String way_time;//Время рейса
-        private String way_number;//Номер рейса
-        private String way_company;//Компания
-        private String way_end;//Место
-        private String way_terminal;//Номер терминала
-        private String way_status;//Статус рейса
+        private String way_time;
+        private String way_number;
+        private String way_company;
+        private String way_end;
+        private String way_terminal;
+        private String way_status;
         private String way_image;
 
     public String getWay_image()

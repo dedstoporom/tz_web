@@ -31,11 +31,11 @@ public class MainController
         return "main";
     }
     @RequestMapping("/bd")
-    public String bd(Model model, @Param("keyword") String keyword) throws InterruptedException/*по request включаем param keyword*/
+    public String bd(Model model, @Param("keyword") String keyword) throws InterruptedException
     {
         long starttime=System.currentTimeMillis();
         logger.info(keyword);
-        Iterable<flying> flying= flying_repository.search(keyword);/*search создан в репозитории*/
+        Iterable<flying> flying= flying_repository.search(keyword);
         model.addAttribute("flying",flying);
         return "main";
     }

@@ -18,10 +18,10 @@ public class Parser
     private static Document page;
     public static int ind=-1;
     private static String img_name;
-    private static Document get_page() //Document-для возвращения html-кода
+    private static Document get_page()
     {
-        String url="http://www.vnukovo.ru/flights/online-timetable/#tab-sortie";//Внуково
-        Document page= null;//Сам документ
+        String url="http://www.vnukovo.ru/flights/online-timetable/#tab-sortie";
+        Document page= null;
         try {
             page = Jsoup.parse(new URL(url),3000);
             return page;
@@ -30,22 +30,22 @@ public class Parser
             return null;
         }
     }
-    @Scheduled(fixedDelay =30000)/*Тайминг обновления БД*/
+    @Scheduled(fixedDelay =30000)
     public void flight_table() throws Exception
     {
         page=get_page();
         Elements main_table=page.select("div[class=ajax-result]");
         Elements table=main_table.select("tbody");
-        Element way=table.select("tr").get(0);//Рейс
-        Elements data_way=way.select("td");//Данные рейса
+        Element way=table.select("tr").get(0);
+        Elements data_way=way.select("td");
         int a;
-         System.out.println("[db update]");
+
          flying_repository.deleteAll();
         for(a=0;a<table.select("tr").size()-2;a++)
         {
             way=table.select("tr").get(a);//Рейс
             img_name=way.select("img[class=company-logo]").attr("src");
-            data_way=way.select("td");//Данные рейса
+            data_way=way.select("td");
             if(data_way.size()==6)
             {
                 flying flying=new flying();
